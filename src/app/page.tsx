@@ -13,6 +13,8 @@ import {
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 const contentWidthClass = "mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12";
+const heroBackgroundImage =
+  "https://soundseam-origin.s3.us-east-2.amazonaws.com/misc/89648983-dc60-4fdc-beb1-c15fb736b3b2.png";
 
 const staggerGroupVariants: Variants = {
   hidden: { opacity: 1 },
@@ -589,11 +591,33 @@ export default function Home() {
         </div>
       </header>
       <motion.section
-        className="min-h-screen rounded-b-[4.5rem] bg-neutral-100"
+        className="relative min-h-screen overflow-hidden rounded-b-[4.5rem] bg-neutral-100"
         variants={blurItemVariants}
       >
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 w-full overflow-hidden sm:w-[82%] lg:w-[68%] xl:w-[64%]"
+          style={{
+            maskImage:
+              "linear-gradient(90deg, transparent 0%, black 24%, black 100%)",
+            WebkitMaskImage:
+              "linear-gradient(90deg, transparent 0%, black 24%, black 100%)",
+          }}
+        >
+          <div
+            className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url("${heroBackgroundImage}")`,
+              filter: "grayscale(1)",
+            }}
+          />
+        </div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.96)_48%,rgba(255,255,255,0.78)_64%,rgba(255,255,255,0.34)_84%,rgba(255,255,255,0.14)_100%)]"
+        />
         <motion.div
-          className="flex min-h-screen flex-col"
+          className="relative z-10 flex min-h-screen flex-col"
           variants={staggerGroupVariants}
         >
           <div className="flex flex-1 items-end">
