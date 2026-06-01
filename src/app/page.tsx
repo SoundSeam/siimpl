@@ -183,7 +183,13 @@ const footerLinkGroups = [
   },
 ] as const;
 
-const footerContactDetails = [
+type FooterContactDetail = {
+  readonly label: string;
+  readonly value: string;
+  readonly href?: string;
+};
+
+const footerContactDetails: readonly FooterContactDetail[] = [
   {
     label: "Location",
     value: "6705 Bd Chevrier #105, Brossard, Quebec J4Z 3T9",
