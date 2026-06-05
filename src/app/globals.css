@@ -7,12 +7,6 @@
   --primary: #e4f21f;
   --primary-foreground: #171717;
   --section-scroll-offset: 4.75rem;
-  --font-sans:
-    "Akt", "Segoe UI", ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, sans-serif;
-  --font-mono:
-    ui-monospace, "SFMono-Regular", SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
 }
 
 @theme inline {
