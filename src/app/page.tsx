@@ -817,16 +817,10 @@ export default function Home() {
       >
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 w-full overflow-hidden sm:w-[82%] lg:w-[68%] xl:w-[64%]"
-          style={{
-            maskImage:
-              "linear-gradient(90deg, transparent 0%, black 24%, black 100%)",
-            WebkitMaskImage:
-              "linear-gradient(90deg, transparent 0%, black 24%, black 100%)",
-          }}
+          className="hero-background-media absolute inset-y-0 right-0 w-full overflow-hidden sm:w-[82%] lg:w-[68%] xl:w-[64%]"
         >
           <div
-            className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat"
+            className="hero-background-image absolute inset-0 bg-cover bg-no-repeat"
             style={{
               backgroundImage: `url("${heroBackgroundImage}")`,
             }}
@@ -834,7 +828,7 @@ export default function Home() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.96)_48%,rgba(255,255,255,0.78)_64%,rgba(255,255,255,0.34)_84%,rgba(255,255,255,0.14)_100%)]"
+          className="hero-background-overlay absolute inset-0"
         />
         <motion.div
           className="relative z-10 flex min-h-screen flex-col"
@@ -843,7 +837,7 @@ export default function Home() {
           <div className="flex flex-1 items-end">
             <div className="mx-auto w-full max-w-7xl px-6 pb-6 sm:px-8 sm:pb-8 lg:px-12 lg:pb-12">
               <motion.div
-                className="flex max-w-4xl flex-col items-start text-left"
+                className="flex max-w-4xl flex-col items-center text-center sm:items-start sm:text-left"
                 variants={staggerGroupVariants}
               >
                 <AnimatedWords
@@ -865,7 +859,7 @@ export default function Home() {
                   text="Siimpl helps business owners manage accounting, tax planning, bookkeeping, payroll, and financial decisions with clear guidance from an experienced local team."
                 />
                 <motion.div
-                  className="mt-10 flex flex-wrap items-center gap-3 sm:gap-4"
+                  className="mt-10 flex w-full flex-wrap items-center justify-center gap-3 sm:justify-start sm:gap-4"
                   variants={staggerGroupVariants}
                 >
                   <motion.a
