@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "mtan",
-  description: "Next.js 16 app",
+  title: "Siimpl | Accounting, Tax, Payroll & Advisory in Quebec",
+  description:
+    "Modern accounting, tax planning, bookkeeping, payroll, and advisory support for Quebec businesses that want clarity, compliance, and growth support.",
 };
 
 export default function RootLayout({
