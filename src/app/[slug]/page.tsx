@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import BookedCallPrompt from "@/components/app/BookedCallPrompt";
 import CurrentDateLabel from "./CurrentDateLabel";
 import ServicePageClient from "./ServicePageClient";
 
@@ -460,7 +459,6 @@ export default async function ServiceArticlePage({ params }: PageProps) {
           </div>
         </div>
       </footer>
-      <BookedCallPrompt />
     </main>
   );
 }

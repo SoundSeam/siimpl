@@ -17,7 +17,6 @@ import {
   FaArrowRight,
   FaMoneyCheckAlt,
 } from "react-icons/fa";
-import BookedCallPrompt from "@/components/app/BookedCallPrompt";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 const contentWidthClass = "mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12";
@@ -1456,7 +1455,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      <BookedCallPrompt />
     </motion.main>
   );
 }
