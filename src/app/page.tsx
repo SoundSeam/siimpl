@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { FormEvent, MouseEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, type Variants } from "motion/react";
@@ -10,6 +11,7 @@ import Flicking, {
   type WillChangeEvent,
 } from "@egjs/react-flicking";
 import { AutoPlay, Pagination, Perspective } from "@egjs/flicking-plugins";
+import { FiMenu, FiX } from "react-icons/fi";
 import {
   FaCalculator,
   FaChartLine,
@@ -372,6 +374,7 @@ const footerContactDetails: readonly FooterContactDetail[] = [
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [activeProblem, setActiveProblem] = useState(0);
@@ -530,6 +533,7 @@ export default function Home() {
 
     event.preventDefault();
     setServicesOpen(false);
+    setMobileMenuOpen(false);
 
     if (window.location.hash === targetHash) {
       window.history.replaceState(null, "", targetHash);
@@ -591,7 +595,7 @@ export default function Home() {
             <motion.span
               aria-label="Siimpl logo"
               role="img"
-              className="block h-6 w-[6.3rem] bg-black"
+              className="block h-[1.125rem] w-[4.725rem] bg-black md:h-6 md:w-[6.3rem]"
               style={{
                 WebkitMaskImage: 'url("/Recurso-3.svg")',
                 WebkitMaskPosition: "center",
@@ -701,57 +705,6 @@ export default function Home() {
             className="flex items-center gap-2 sm:gap-3"
             variants={staggerGroupVariants}
           >
-            <nav className="flex items-center gap-1 md:hidden sm:gap-2">
-              <button
-                type="button"
-                aria-expanded={servicesOpen}
-                className="inline-flex h-8 items-center justify-center gap-2 rounded-full px-4 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/10"
-                onClick={() => setServicesOpen((open) => !open)}
-              >
-                <AnimatedWords
-                  as="span"
-                  className="inline-flex"
-                  stagger={0.04}
-                  text="Services"
-                />
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 20 20"
-                  className={`h-4 w-4 transition-transform duration-200 ${
-                    servicesOpen ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m5 8 5 5 5-5" />
-                </svg>
-              </button>
-              <a
-                {...getSectionLinkProps("#why-siimpl")}
-                className="inline-flex h-8 items-center justify-center rounded-full px-4 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/10"
-              >
-                <AnimatedWords
-                  as="span"
-                  className="inline-flex"
-                  stagger={0.04}
-                  text="Why Siimpl"
-                />
-              </a>
-              <a
-                {...getSectionLinkProps("#contact")}
-                className="inline-flex h-8 items-center justify-center rounded-full px-4 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/10"
-              >
-                <AnimatedWords
-                  as="span"
-                  className="inline-flex"
-                  stagger={0.04}
-                  text="Contact"
-                />
-              </a>
-            </nav>
             <motion.a
               href="/sign-in"
               className="hidden h-9 items-center justify-center rounded-full px-5 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/10 sm:inline-flex sm:h-10 sm:px-6 sm:text-base"
@@ -769,31 +722,56 @@ export default function Home() {
               className="inline-flex h-9 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:h-10 sm:px-6 sm:text-base"
               variants={blurItemVariants}
             >
+              <span className="sm:hidden">Book</span>
               <AnimatedWords
                 as="span"
-                className="inline-flex"
+                className="hidden sm:inline-flex"
                 stagger={0.04}
                 text="Book a Consultation"
               />
             </motion.a>
+            <button
+              type="button"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-neutral-950 transition-colors duration-200 hover:bg-black/10 md:hidden"
+              onClick={() => {
+                setMobileMenuOpen((open) => !open);
+                setServicesOpen(false);
+              }}
+            >
+              {mobileMenuOpen ? (
+                <FiX aria-hidden="true" className="h-5 w-5" />
+              ) : (
+                <FiMenu aria-hidden="true" className="h-5 w-5" />
+              )}
+            </button>
           </motion.div>
         </motion.div>
         <div
-          className={`mx-auto w-full max-w-7xl px-6 md:hidden sm:px-8 lg:px-12 ${
-            servicesOpen ? "pb-4" : "pb-0"
+          id="mobile-menu"
+          className={`mx-auto w-full max-w-7xl px-6 md:hidden sm:px-8 ${
+            mobileMenuOpen ? "pb-4" : "pb-0"
           }`}
         >
           <div
             className={`overflow-hidden transition-all duration-200 ${
-              servicesOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
+              mobileMenuOpen
+                ? "max-h-[40rem] opacity-100"
+                : "max-h-0 opacity-0"
             }`}
           >
-            <div className="services-dropdown-surface flex flex-col rounded-3xl p-3 shadow-lg shadow-black/5">
+            <nav className="services-dropdown-surface flex flex-col gap-1 rounded-3xl p-3 shadow-lg shadow-black/5">
+              <div className="px-3 pb-2 pt-1 text-xs font-semibold uppercase tracking-[0.14em] text-black/50">
+                Services
+              </div>
               {serviceItems.map((item) => (
                 <a
                   key={item.name}
                   href={`/${item.slug}`}
                   className="group flex items-start gap-4 rounded-2xl p-3 text-black transition-colors duration-200 hover:bg-black/5"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#f5f2f0] text-black transition-colors duration-200 group-hover:bg-black group-hover:text-white">
                     {item.icon}
@@ -808,7 +786,28 @@ export default function Home() {
                   </div>
                 </a>
               ))}
-            </div>
+              <div className="mt-2 border-t border-black/10 pt-2">
+                <a
+                  {...getSectionLinkProps("#why-siimpl")}
+                  className="flex min-h-11 items-center rounded-2xl px-3 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/5"
+                >
+                  Why Siimpl
+                </a>
+                <a
+                  {...getSectionLinkProps("#contact")}
+                  className="flex min-h-11 items-center rounded-2xl px-3 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/5"
+                >
+                  Contact
+                </a>
+                <Link
+                  href="/sign-in"
+                  className="flex min-h-11 items-center rounded-2xl px-3 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/5 sm:hidden"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign in
+                </Link>
+              </div>
+            </nav>
           </div>
         </div>
       </header>

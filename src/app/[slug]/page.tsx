@@ -238,6 +238,13 @@ const servicesBySlug = {
   },
 } as const;
 
+const serviceNavItems = Object.entries(servicesBySlug).map(
+  ([slug, service]) => ({
+    href: `/${slug}`,
+    label: service.title,
+  }),
+);
+
 type ServiceSlug = keyof typeof servicesBySlug;
 
 type PageProps = {
@@ -293,7 +300,7 @@ export default async function ServiceArticlePage({ params }: PageProps) {
             <Link
               href="/"
               aria-label="Siimpl home"
-              className="block h-6 w-[6.3rem] bg-black"
+              className="block h-[1.125rem] w-[4.725rem] bg-black md:h-6 md:w-[6.3rem]"
               style={{
                 WebkitMaskImage: 'url("/Recurso-3.svg")',
                 WebkitMaskPosition: "center",
@@ -337,8 +344,57 @@ export default async function ServiceArticlePage({ params }: PageProps) {
               href="#contact"
               className="inline-flex h-9 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:h-10 sm:px-6 sm:text-base"
             >
-              Book a Consultation
+              <span className="sm:hidden">Book</span>
+              <span className="hidden sm:inline">Book a Consultation</span>
             </a>
+            <details className="group relative md:hidden">
+              <summary
+                aria-label="Open menu"
+                className="inline-flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-full text-neutral-950 transition-colors duration-200 hover:bg-black/10 [&::-webkit-details-marker]:hidden"
+              >
+                <span className="flex h-4 w-5 flex-col justify-between">
+                  <span className="block h-px w-full bg-current" />
+                  <span className="block h-px w-full bg-current" />
+                  <span className="block h-px w-full bg-current" />
+                </span>
+              </summary>
+              <nav className="services-dropdown-surface absolute right-0 top-full mt-3 flex w-[calc(100vw-3rem)] max-w-sm flex-col gap-1 rounded-3xl p-3 shadow-lg shadow-black/5">
+                <Link
+                  href="/"
+                  className="flex min-h-11 items-center rounded-2xl px-3 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/5"
+                >
+                  Home
+                </Link>
+                <div className="mt-2 border-t border-black/10 pt-2">
+                  <div className="px-3 pb-2 pt-1 text-xs font-semibold uppercase tracking-[0.14em] text-black/50">
+                    Services
+                  </div>
+                  {serviceNavItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex min-h-11 items-center rounded-2xl px-3 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/5"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-2 border-t border-black/10 pt-2">
+                  <Link
+                    href="/#why-siimpl"
+                    className="flex min-h-11 items-center rounded-2xl px-3 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/5"
+                  >
+                    Why Siimpl
+                  </Link>
+                  <a
+                    href="#contact"
+                    className="flex min-h-11 items-center rounded-2xl px-3 text-sm font-medium text-neutral-950 transition-colors duration-200 hover:bg-black/5"
+                  >
+                    Contact
+                  </a>
+                </div>
+              </nav>
+            </details>
           </div>
         </div>
       </header>
